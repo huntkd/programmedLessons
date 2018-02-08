@@ -1,4 +1,5 @@
-import java.io.* ;
+import java.io.*;
+import java.util.*;
 
 class PanagramDetector
 {
@@ -7,25 +8,30 @@ class PanagramDetector
   {
   	System.out.println("Write a sentence:");
 
-    String sentence = args;
-    char[] alphabet = "abcdefghijklmnopqrstuvwxyz".ToCharArray();
-    int[] letterCount = new int[26];
-    int letters = 0;
+    Scanner scan = new Scanner(System.in);
+    String sentence = scan.nextLine();
+    sentence = sentence.toLowerCase();
+    boolean panagramTrue = detectPanagram(sentence);
 
-    for (int index=0; index < sentence.length();) {
-    	for (int letter = 0; letter < 27; letter++) {
-        char l = alphabet[letter];
-        if (l.equals(sentence.charAt(index))) {
-          index++;
-          if (index < 26) {
-
-          }
-        } 
-        System.out.println("This sentence is not a panagram!");
-
-      }
-    }
-
-
+    if (panagramTrue) {
+     System.out.println("Panagram");
+    } else {
+      System.out.println("Not panagram");
+    } 
   }
+
+  private static boolean detectPanagram(String sentence) {
+    if (sentence.length() < 26)
+       return false;
+    else {
+      for (char ch = 'a'; ch <= 'z'; ch++) {
+         if (sentence.indexOf(ch) < 0) {
+           return false;
+          } 
+      }
+    } 
+    return true;
+  }
+    
+
 }      
